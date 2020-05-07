@@ -1,0 +1,162 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Before Loading another program in child proces.
+
+Address space, segment allocation remained same.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+ar@tar-XPS-15-9560:/proc/32263$ cat maps
+5582424dc000-5582424dd000 r--p 00000000 103:06 7471455                   /home/tar/Desktop/Adv OS/testPgms/exampleSingleThread
+5582424dd000-5582424de000 r-xp 00001000 103:06 7471455                   /home/tar/Desktop/Adv OS/testPgms/exampleSingleThread
+5582424de000-5582424df000 r--p 00002000 103:06 7471455                   /home/tar/Desktop/Adv OS/testPgms/exampleSingleThread
+5582424df000-5582424e0000 r--p 00002000 103:06 7471455                   /home/tar/Desktop/Adv OS/testPgms/exampleSingleThread
+5582424e0000-5582424e1000 rw-p 00003000 103:06 7471455                   /home/tar/Desktop/Adv OS/testPgms/exampleSingleThread
+5582426b5000-5582426d6000 rw-p 00000000 00:00 0                          [heap]
+7fe37f441000-7fe37f466000 r--p 00000000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fe37f466000-7fe37f5d9000 r-xp 00025000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fe37f5d9000-7fe37f622000 r--p 00198000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fe37f622000-7fe37f625000 r--p 001e0000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fe37f625000-7fe37f628000 rw-p 001e3000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fe37f628000-7fe37f62e000 rw-p 00000000 00:00 0 
+7fe37f641000-7fe37f642000 r--p 00000000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fe37f642000-7fe37f663000 r-xp 00001000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fe37f663000-7fe37f66b000 r--p 00022000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fe37f66b000-7fe37f66c000 r--p 00029000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fe37f66c000-7fe37f66d000 rw-p 0002a000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fe37f66d000-7fe37f66e000 rw-p 00000000 00:00 0 
+7ffd7a067000-7ffd7a088000 rw-p 00000000 00:00 0                          [stack]
+7ffd7a0a9000-7ffd7a0ac000 r--p 00000000 00:00 0                          [vvar]
+7ffd7a0ac000-7ffd7a0ad000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+
+
+tar@tar-XPS-15-9560:/proc/32264$ cat maps
+5582424dc000-5582424dd000 r--p 00000000 103:06 7471455                   /home/tar/Desktop/Adv OS/testPgms/exampleSingleThread
+5582424dd000-5582424de000 r-xp 00001000 103:06 7471455                   /home/tar/Desktop/Adv OS/testPgms/exampleSingleThread
+5582424de000-5582424df000 r--p 00002000 103:06 7471455                   /home/tar/Desktop/Adv OS/testPgms/exampleSingleThread
+5582424df000-5582424e0000 r--p 00002000 103:06 7471455                   /home/tar/Desktop/Adv OS/testPgms/exampleSingleThread
+5582424e0000-5582424e1000 rw-p 00003000 103:06 7471455                   /home/tar/Desktop/Adv OS/testPgms/exampleSingleThread
+5582426b5000-5582426d6000 rw-p 00000000 00:00 0                          [heap]
+7fe37f441000-7fe37f466000 r--p 00000000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fe37f466000-7fe37f5d9000 r-xp 00025000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fe37f5d9000-7fe37f622000 r--p 00198000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fe37f622000-7fe37f625000 r--p 001e0000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fe37f625000-7fe37f628000 rw-p 001e3000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fe37f628000-7fe37f62e000 rw-p 00000000 00:00 0 
+7fe37f641000-7fe37f642000 r--p 00000000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fe37f642000-7fe37f663000 r-xp 00001000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fe37f663000-7fe37f66b000 r--p 00022000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fe37f66b000-7fe37f66c000 r--p 00029000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fe37f66c000-7fe37f66d000 rw-p 0002a000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fe37f66d000-7fe37f66e000 rw-p 00000000 00:00 0 
+7ffd7a067000-7ffd7a088000 rw-p 00000000 00:00 0                          [stack]
+7ffd7a0a9000-7ffd7a0ac000 r--p 00000000 00:00 0                          [vvar]
+7ffd7a0ac000-7ffd7a0ad000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+tar@tar-XPS-15-9560:/proc/32264$ 
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+After Loading another program in child proces the address space became entirely different.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+55955b804000-55955b825000 - parent  
+559559a25000-559559a26000 r--p 00000000 103:06 7471401                   /home/tar/Desktop/Adv OS/testPgms/example
+559559a26000-559559a27000 r-xp 00001000 103:06 7471401                   /home/tar/Desktop/Adv OS/testPgms/example
+559559a27000-559559a28000 r--p 00002000 103:06 7471401                   /home/tar/Desktop/Adv OS/testPgms/example
+559559a28000-559559a29000 r--p 00002000 103:06 7471401                   /home/tar/Desktop/Adv OS/testPgms/example
+559559a29000-559559a2a000 rw-p 00003000 103:06 7471401                   /home/tar/Desktop/Adv OS/testPgms/example
+55955b804000-55955b825000 rw-p 00000000 00:00 0                          [heap]
+7fc5c0349000-7fc5c036e000 r--p 00000000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fc5c036e000-7fc5c04e1000 r-xp 00025000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fc5c04e1000-7fc5c052a000 r--p 00198000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fc5c052a000-7fc5c052d000 r--p 001e0000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fc5c052d000-7fc5c0530000 rw-p 001e3000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fc5c0530000-7fc5c0536000 rw-p 00000000 00:00 0 
+7fc5c0549000-7fc5c054a000 r--p 00000000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fc5c054a000-7fc5c056b000 r-xp 00001000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fc5c056b000-7fc5c0573000 r--p 00022000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fc5c0573000-7fc5c0574000 r--p 00029000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fc5c0574000-7fc5c0575000 rw-p 0002a000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fc5c0575000-7fc5c0576000 rw-p 00000000 00:00 0 
+7ffd1db92000-7ffd1dbb3000 rw-p 00000000 00:00 0                          [stack]
+7ffd1dbb8000-7ffd1dbbb000 r--p 00000000 00:00 0                          [vvar]
+7ffd1dbbb000-7ffd1dbbc000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+tar@tar-XPS-15-9560:/proc/31691$ cd 
+
+
+
+556e318ab000-556e318cc000 - child
+tar@tar-XPS-15-9560:/proc/31692$ cat maps
+556e3028e000-556e3028f000 r--p 00000000 103:06 7471403                   /home/tar/Desktop/Adv OS/testPgms/hello
+556e3028f000-556e30290000 r-xp 00001000 103:06 7471403                   /home/tar/Desktop/Adv OS/testPgms/hello
+556e30290000-556e30291000 r--p 00002000 103:06 7471403                   /home/tar/Desktop/Adv OS/testPgms/hello
+556e30291000-556e30292000 r--p 00002000 103:06 7471403                   /home/tar/Desktop/Adv OS/testPgms/hello
+556e30292000-556e30293000 rw-p 00003000 103:06 7471403                   /home/tar/Desktop/Adv OS/testPgms/hello
+556e318ab000-556e318cc000 rw-p 00000000 00:00 0                          [heap]
+7fdaeb21a000-7fdaeb23f000 r--p 00000000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fdaeb23f000-7fdaeb3b2000 r-xp 00025000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fdaeb3b2000-7fdaeb3fb000 r--p 00198000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fdaeb3fb000-7fdaeb3fe000 r--p 001e0000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fdaeb3fe000-7fdaeb401000 rw-p 001e3000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7fdaeb401000-7fdaeb407000 rw-p 00000000 00:00 0 
+7fdaeb41a000-7fdaeb41b000 r--p 00000000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fdaeb41b000-7fdaeb43c000 r-xp 00001000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fdaeb43c000-7fdaeb444000 r--p 00022000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fdaeb444000-7fdaeb445000 r--p 00029000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fdaeb445000-7fdaeb446000 rw-p 0002a000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7fdaeb446000-7fdaeb447000 rw-p 00000000 00:00 0 
+7fff8c330000-7fff8c351000 rw-p 00000000 00:00 0                          [stack]
+7fff8c3ee000-7fff8c3f1000 r--p 00000000 00:00 0                          [vvar]
+7fff8c3f1000-7fff8c3f2000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+
+
+
+55aa68b70000-55aa68b91000 - separate process - hello.c
+
+tar@tar-XPS-15-9560:/proc/31959$ cat maps
+55aa67054000-55aa67055000 r--p 00000000 103:06 7471403                   /home/tar/Desktop/Adv OS/testPgms/hello
+55aa67055000-55aa67056000 r-xp 00001000 103:06 7471403                   /home/tar/Desktop/Adv OS/testPgms/hello
+55aa67056000-55aa67057000 r--p 00002000 103:06 7471403                   /home/tar/Desktop/Adv OS/testPgms/hello
+55aa67057000-55aa67058000 r--p 00002000 103:06 7471403                   /home/tar/Desktop/Adv OS/testPgms/hello
+55aa67058000-55aa67059000 rw-p 00003000 103:06 7471403                   /home/tar/Desktop/Adv OS/testPgms/hello
+55aa68b70000-55aa68b91000 rw-p 00000000 00:00 0                          [heap]
+7f54316ba000-7f54316df000 r--p 00000000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7f54316df000-7f5431852000 r-xp 00025000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7f5431852000-7f543189b000 r--p 00198000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7f543189b000-7f543189e000 r--p 001e0000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7f543189e000-7f54318a1000 rw-p 001e3000 103:06 9969583                   /usr/lib/x86_64-linux-gnu/libc-2.29.so
+7f54318a1000-7f54318a7000 rw-p 00000000 00:00 0 
+7f54318ba000-7f54318bb000 r--p 00000000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7f54318bb000-7f54318dc000 r-xp 00001000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7f54318dc000-7f54318e4000 r--p 00022000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7f54318e4000-7f54318e5000 r--p 00029000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7f54318e5000-7f54318e6000 rw-p 0002a000 103:06 9969363                   /usr/lib/x86_64-linux-gnu/ld-2.29.so
+7f54318e6000-7f54318e7000 rw-p 00000000 00:00 0 
+7ffe9b196000-7ffe9b1b7000 rw-p 00000000 00:00 0                          [stack]
+7ffe9b1f7000-7ffe9b1fa000 r--p 00000000 00:00 0                          [vvar]
+7ffe9b1fa000-7ffe9b1fb000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+tar@tar-XPS-15-9560:/proc/31959$ cd 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
