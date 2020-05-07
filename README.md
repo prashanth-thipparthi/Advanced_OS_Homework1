@@ -1,6 +1,6 @@
 # Advanced_OS_Homework1
 Detailed write up [link](https://github.com/prashanth-thipparthi/Advanced_OS_Homework1/blob/master/Homework%20one.pdf "Title").
-The goal of this homework is to get familiar with Linux Kernel Modules as well as some kernel debugging tools.
-
-1. Inserting a new system call using LKM
-2. Experience with rootkits and countermeasures 
+1. Monitoring the kernel state through /proc 
+2. Virtual memory layout of a process  
+3. Virtual memory layout of a child process  
+5. Overwriting the virtual memory of a process  
